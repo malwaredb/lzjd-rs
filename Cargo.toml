@@ -12,20 +12,20 @@ license = "GPL-3.0"
 repository = "https://github.com/tweedegolf/lzjd-rs"
 
 [dependencies]
-clap = "2.32.0"
-base64 = "0.10.1"
-failure = "0.1.5"
-failure_derive = "0.1.5"
-fasthash= "0.4.0"
-bincode = "1.1.2"
-crc = "1.8.1"
-walkdir = "2.2.7"
-num_cpus = "1.10.0"
-rayon = "1.0.3"
+clap = { version = "2.32.0", default-features = false }
+base64 = { version = "0.10", default-features = false }
+failure = { version = "0.1.5", features = ["std"], default-features = false }
+failure_derive = { version = "0.1.5", default-features = false }
+fasthash = { git = "https://github.com/flier/rust-fasthash", rev = "ef0c52b4157af9a1a7d19b2a37658b6c26a6bea6", features = ["murmur"], default-features = false }
+bincode = { version = "1.1.2", default-features = false }
+crc = { version = "1.8", default-features = false }
+walkdir = { version = "2.2.7", default-features = false }
+num_cpus = { version = "1.10.0", default-features = false }
+rayon = { version = "1.0.3", default-features = false }
 
 [dev-dependencies]
-rand = "0.6.5"
-criterion = "0.2.10"
+rand = "0.8"
+criterion = "0.4"
 
 [[bench]]
 name = "lzjd"
