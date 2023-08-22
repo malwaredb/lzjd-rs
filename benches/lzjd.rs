@@ -1,9 +1,7 @@
-#[macro_use]
-extern crate criterion;
+use malwaredb_lzjd::crc32::CRC32BuildHasher;
+use malwaredb_lzjd::LZDict;
 
-use ::lzjd::crc32::CRC32BuildHasher;
-use ::lzjd::LZDict;
-use criterion::Criterion;
+use criterion::{criterion_group, criterion_main, Criterion};
 use rand::prelude::*;
 
 fn generate_byte_sequence() -> Vec<u8> {

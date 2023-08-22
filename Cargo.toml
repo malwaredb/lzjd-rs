@@ -1,8 +1,8 @@
 [package]
-name = "lzjd"
-version = "0.2.0"
-authors = ["Henk Dieter <henkdieter@tweedegolf.com>"]
-edition = "2018"
+name = "malwaredb-lzjd"
+version = "0.1.0"
+authors = ["Henk Dieter <henkdieter@tweedegolf.com>", "Richard Zak <richard.j.zak@gmail.com>"]
+edition = "2021"
 exclude = ["in/*", "out/*"]
 description = "Rust implementation of the LZJD algorithm (https://github.com/EdwardRaff/jLZJD)"
 readme = "README.md"
@@ -14,7 +14,7 @@ repository = "https://github.com/tweedegolf/lzjd-rs"
 [dependencies]
 clap = "3.2"
 base64 = "0.13.1"
-murmurhash3 = { git = "https://github.com/malwaredb/murmurhash3-rs", branch = "update" }
+malwaredb-murmurhash3 = "0.1.0"
 bincode = "1.1.2"
 crc = "1.8.1"
 walkdir = "2.2.7"

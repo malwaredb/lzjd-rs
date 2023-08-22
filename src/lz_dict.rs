@@ -1,4 +1,5 @@
 use crate::Result;
+
 use core::hash::BuildHasher;
 use core::hash::Hasher;
 use core::ops::Deref;
@@ -8,7 +9,7 @@ use std::fmt::{Display, Formatter};
 /// A sorted list of the k smallest LZSet hashes
 #[derive(Debug)]
 pub struct LZDict {
-    // Once const generics are stablilized, entries can be an array
+    // Once const generics are stabilized, entries can be an array
     // and the crate can become no_std
     entries: Vec<i32>,
 }

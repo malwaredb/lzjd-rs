@@ -7,7 +7,7 @@
 //!
 //! ## Example
 //! ```
-//! # use lzjd::lz_dict::LZDict;
+//! # use malwaredb_lzjd::lz_dict::LZDict;
 //! # use crc::crc32::{self, Hasher32};
 //! # use std::hash::BuildHasher;
 //! # use std::hash::Hasher;
