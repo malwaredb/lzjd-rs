@@ -11,6 +11,10 @@ Main differences:
 - Based on Vec<u64> instead of IntSetNoRemove, which is more like HashMap
 - Hash files are considerably smaller if small sequences have been digested
 
+This fork has minor changes:
+* Update to Rust edition 2021.
+* Remove dependencies preventing it from working on non-x86 hardware.
+
 ```
 USAGE:
     lzjd [FLAGS] [OPTIONS] <INPUT>...
