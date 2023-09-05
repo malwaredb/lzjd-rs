@@ -17,7 +17,7 @@ base64 = "0.13.1"
 malwaredb-murmurhash3 = "0.1.0"
 bincode = "1.1.2"
 crc = "1.8.1"
-walkdir = "2.2.7"
+walkdir = "2.4.0"
 num_cpus = "1.10.0"
 rayon = "1.0.3"
 
