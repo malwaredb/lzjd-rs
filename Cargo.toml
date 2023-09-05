@@ -13,7 +13,7 @@ repository = "https://github.com/tweedegolf/lzjd-rs"
 
 [dependencies]
 clap = "3.2"
-base64 = "0.13.1"
+base64 = "0.21.3"
 malwaredb-murmurhash3 = "0.1.0"
 bincode = "1.1.2"
 crc = "1.8.1"
