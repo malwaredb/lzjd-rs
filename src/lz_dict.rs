@@ -1,5 +1,7 @@
 use crate::Result;
 
+use base64::engine::general_purpose;
+use base64::Engine;
 use core::hash::BuildHasher;
 use core::hash::Hasher;
 use core::ops::Deref;
@@ -17,7 +19,7 @@ pub struct LZDict {
 impl LZDict {
     /// Converts a base64 string into a Vec<i64> and wraps a LZDict around it.
     pub fn from_base64_string(b64: &str) -> Result<Self> {
-        let bytes = base64::decode(b64)?;
+        let bytes = general_purpose::STANDARD.decode(b64)?;
         let mut entries = vec![];
         for i in 0..bytes.len() / 8 {
             let vec = bytes
@@ -182,7 +184,7 @@ impl Display for LZDict {
             .iter()
             .flat_map(|hash| bincode::serialize(&hash).unwrap())
             .collect();
-        let encoded = base64::encode(bytes);
+        let encoded = general_purpose::STANDARD.encode(bytes);
         write!(f, "{encoded}")
     }
 }
