@@ -1,6 +1,6 @@
 [package]
 name = "malwaredb-lzjd"
-version = "0.1.1"
+version = "0.1.2"
 authors = ["Henk Dieter <henkdieter@tweedegolf.com>", "Richard Zak <richard.j.zak@gmail.com>"]
 edition = "2021"
 exclude = ["in/*", "out/*"]
