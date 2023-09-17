@@ -8,26 +8,25 @@
 //! ## Example
 //! ```
 //! # use malwaredb_lzjd::lz_dict::LZDict;
-//! # use crc::crc32::{self, Hasher32};
 //! # use std::hash::BuildHasher;
 //! # use std::hash::Hasher;
 //! # pub struct CRC32Hasher {
-//! #   digest: crc::crc32::Digest,
+//! #   hasher: crc32fast::Hasher,
 //! # }
 //! #
 //! # impl CRC32Hasher {
 //! #     fn new() -> Self {
 //! #       Self {
-//! #           digest: crc32::Digest::new(crc::crc32::IEEE),
+//! #           hasher: crc32fast::Hasher::new(),
 //! #       }
 //! #   }
 //! # }
 //! # impl Hasher for CRC32Hasher {
 //! #     fn write(&mut self, bytes: &[u8]) {
-//! #         Hasher32::write(&mut self.digest, bytes);
+//! #         self.hasher.update(bytes)
 //! #     }
 //! #     fn finish(&self) -> u64 {
-//! #         u64::from(self.digest.sum32())
+//! #         self.hasher.finish()
 //! #     }
 //! # }
 //! # #[derive(Clone)]
