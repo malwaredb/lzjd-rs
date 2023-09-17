@@ -10,7 +10,7 @@ use std::path::PathBuf;
 use std::process;
 use std::rc::Rc;
 
-use clap::{App, Arg};
+use clap::Parser;
 use murmurhash3::Murmur3HashState;
 use rayon::prelude::*;
 use walkdir::WalkDir;
@@ -21,6 +21,37 @@ enum Error {
     Walkdir(String),
     ThreadPoolBuild(String),
     Lzjd(LZJDError),
+}
+
+#[derive(Parser, Debug)]
+struct Args {
+    /// Generate SDBFs from directories and files
+    #[arg(short = 'd')]
+    deep: bool,
+
+    /// Compare SDBFs in file, or two SDBF files
+    #[arg(short = 'c')]
+    compare: bool,
+
+    /// Compare all pairs in source data
+    #[arg(short = 'g')]
+    gen_compare: bool,
+
+    /// Only show results >= threshold
+    #[arg(short = 't', default_value = "1")]
+    threshold: u32,
+
+    /// Restrict compute threads to N threads
+    #[arg(short = 'p', default_value_t = num_cpus::get())]
+    threads: usize,
+
+    /// Send output to files
+    #[arg(short = 'o', value_name = "FILE")]
+    files: Option<String>,
+
+    /// Sets the input file to use
+    #[arg(long = "input")]
+    input: Vec<String>,
 }
 
 impl From<io::Error> for Error {
@@ -50,94 +81,31 @@ impl From<LZJDError> for Error {
 type Result<T> = std::result::Result<T, Error>;
 
 fn main() {
-    let cpus = &num_cpus::get().to_string();
+    let args = Args::parse();
 
-    let matches = App::new("LZJD")
-        .version("1.0")
-        .author("Henk Dieter Oordt <henkdieter@tweedegolf.com>")
-        .about("Calculates Lempel-Ziv Jaccard distance of input binaries. Based on jLZJD (https://github.com/EdwardRaff/jLZJD).")
-        .arg(
-            Arg::with_name("deep")
-                .short('r')
-                .long("deep")
-                .help("generate SDBFs from directories and files")
-                .takes_value(false),
-        )
-        .arg(
-            Arg::with_name("compare")
-                .short('c')
-                .long("compare")
-                .help("compare SDBFs in file, or two SDBF files")
-                .takes_value(false),
-        )
-        .arg(
-            Arg::with_name("gen-compare")
-                .short('g')
-                .long("gen-compare")
-                .help("compare all pairs in source data")
-                .takes_value(false),
-        )
-        .arg(
-            Arg::with_name("threshold")
-                .short('t')
-                .long("threshold")
-                .help("only show results >= threshold")
-                .takes_value(true)
-                .default_value("1")
-                .value_name("THRESHOLD"),
-        )
-        .arg(
-            Arg::with_name("threads")
-                .short('p')
-                .long("--threads")
-                .help("restrict compute threads to N threads")
-                .takes_value(true)
-                .default_value(cpus)
-                .value_name("THREADS")
-        )
-        .arg(
-            Arg::with_name("output")
-                .short('o')
-                .long("output")
-                .help("send output to files")
-                .takes_value(true)
-                .value_name("FILE"),
-        )
-        .arg(
-            Arg::with_name("input")
-                .help("Sets the input file to use")
-                .value_name("INPUT")
-                .required(true)
-                .multiple(true),
-        )
-        .get_matches();
-    if let Err(e) = run(matches) {
+    if args.input.is_empty() {
+        eprintln!(
+            "No input files specified. Run with `--input` or with `--help` for more information."
+        );
+        process::exit(-1);
+    }
+
+    if let Err(e) = run(args) {
         eprintln!("{:?}", e);
         process::exit(-1);
     }
 }
 
-fn run(matches: clap::ArgMatches) -> Result<()> {
-    let deep = matches.is_present("deep");
-    let to_compare = matches.is_present("compare");
-    let gen_compare = matches.is_present("gen-compare");
-
-    let threshold = matches
-        .value_of("threshold")
-        .map(|t| t.parse::<u32>().ok())
-        .unwrap_or(Some(1))
-        .unwrap();
-
-    let num_threads = matches
-        .value_of("threads")
-        .map(|p| p.parse::<usize>().ok())
-        .unwrap_or(Some(4))
-        .unwrap();
+fn run(args: Args) -> Result<()> {
+    let deep = args.deep;
+    let to_compare = args.compare;
+    let gen_compare = args.gen_compare;
+    let threshold = args.threshold;
+    let num_threads = args.threads;
 
     let input_paths: Vec<PathBuf> = if deep {
-        matches
-            .get_raw("input")
-            .expect("input is required")
+        args.input
+            .iter()
             .map(PathBuf::from)
             .flat_map(WalkDir::new)
             .try_fold(
@@ -154,14 +122,10 @@ fn run(matches: clap::ArgMatches) -> Result<()> {
                 },
             )?
     } else {
-        matches
-            .get_raw("input")
-            .expect("input is required")
-            .map(PathBuf::from)
-            .collect()
+        args.input.iter().map(PathBuf::from).collect()
     };
 
-    let output_path = matches.value_of("output").map(PathBuf::from);
+    let output_path = args.files.map(PathBuf::from);
 
     rayon::ThreadPoolBuilder::new()
         .num_threads(num_threads)
