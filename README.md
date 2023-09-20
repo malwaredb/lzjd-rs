@@ -1,6 +1,7 @@
+[![Test](https://github.com/malwaredb/lzjd-rs/actions/workflows/test.yml/badge.svg)](https://github.com/malwaredb/lzjd-rs/actions/workflows/test.yml)[![Lint](https://github.com/malwaredb/lzjd-rs/actions/workflows/lint.yml/badge.svg)](https://github.com/malwaredb/lzjd-rs/actions/workflows/lint.yml)
 # LZJD
 
-[Documentation](https://docs.rs/lzjd)
+[Documentation](https://docs.rs/malwaredb-lzjd)
 
 Rust implementation of Lempel-Ziv Jaccard Distance (LZJD) algorithm based on [jLZJD](https://github.com/EdwardRaff/jLZJD)
 
