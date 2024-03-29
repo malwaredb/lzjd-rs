@@ -2,6 +2,7 @@ mod crc32;
 
 use malwaredb_lzjd::{LZDict, LZJDError};
 
+use std::fmt::{Display, Formatter};
 use std::fs::File;
 use std::io::Write;
 use std::io::{self, BufRead, BufReader, BufWriter, Read};
@@ -78,6 +79,19 @@ impl From<LZJDError> for Error {
     }
 }
 
+impl Display for Error {
+    fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Error::Io(e) => write!(f, "I/O error: {e}"),
+            Error::Walkdir(e) => write!(f, "Directory walking error: {e}"),
+            Error::ThreadPoolBuild(e) => write!(f, "Thread error: {e}"),
+            Error::Lzjd(e) => write!(f, "LZJD error: {e:?}"),
+        }
+    }
+}
+
+impl std::error::Error for Error {}
+
 type Result<T> = std::result::Result<T, Error>;
 
 fn main() {
@@ -91,7 +105,7 @@ fn main() {
     }
 
     if let Err(e) = run(args) {
-        eprintln!("{:?}", e);
+        eprintln!("{e}");
         process::exit(-1);
     }
 }
