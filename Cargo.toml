@@ -1,13 +1,13 @@
 [package]
 name = "malwaredb-lzjd"
-version = "0.1.2"
+version = "0.1.3"
 authors = ["Henk Dieter <henkdieter@tweedegolf.com>", "Richard Zak <richard.j.zak@gmail.com>"]
 edition = "2021"
 exclude = ["in/*", "out/*"]
 description = "Rust implementation of the LZJD algorithm by Edward Raff -- https://github.com/EdwardRaff/jLZJD"
 readme = "README.md"
 keywords = ["lzjd", "edit", "distance", "Lempel", "Ziv"]
-categories = ["algorithms","compression","cryptography","filesystem","science"]
+categories = ["algorithms", "compression", "cryptography", "filesystem", "science"]
 license = "GPL-3.0"
 repository = "https://github.com/malwaredb/lzjd-rs"
 
