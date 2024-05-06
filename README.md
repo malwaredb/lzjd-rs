@@ -1,15 +1,16 @@
-[![Test](https://github.com/malwaredb/lzjd-rs/actions/workflows/test.yml/badge.svg)](https://github.com/malwaredb/lzjd-rs/actions/workflows/test.yml)[![Lint](https://github.com/malwaredb/lzjd-rs/actions/workflows/lint.yml/badge.svg)](https://github.com/malwaredb/lzjd-rs/actions/workflows/lint.yml)
+[![Test](https://github.com/malwaredb/lzjd-rs/actions/workflows/test.yml/badge.svg)](https://github.com/malwaredb/lzjd-rs/actions/workflows/test.yml)[![Lint](https://github.com/malwaredb/lzjd-rs/actions/workflows/lint.yml/badge.svg)](https://github.com/malwaredb/lzjd-rs/actions/workflows/lint.yml)[![Crates.io Version](https://img.shields.io/crates/v/malwaredb-lzjd)](https://crates.io/crates/malwaredb-lzjd)
+
 # LZJD
 
 [Documentation](https://docs.rs/malwaredb-lzjd)
 
-Rust implementation of Lempel-Ziv Jaccard Distance (LZJD) algorithm based on [jLZJD](https://github.com/EdwardRaff/jLZJD)
+Rust implementation of Lempel-Ziv Jaccard Distance (LZJD) algorithm based on [jLZJD](https://github.com/EdwardRaff/jLZJD) by Edward Raff.
 
 Main differences:
 - Rust instead of Java
 - Can use any hasher (executable uses CRC32) instead of just Murmur3
 - Does not allocate memory for every unique hash, instead keeps k=1024 smallest
-- Based on Vec<u64> instead of IntSetNoRemove, which is more like HashMap
+- Based on `Vec<u64>` instead of `IntSetNoRemove`, which is more like HashMap
 - Hash files are considerably smaller if small sequences have been digested
 
 This fork has minor changes:
@@ -35,8 +36,7 @@ ARGS:
     <INPUT>...    Sets the input file to use
 ```
 
-
-See also:
+## See also:
 
 - [Original paper](http://www.edwardraff.com/publications/alternative-ncd-lzjd.pdf)
 - [Follow-up paper](https://arxiv.org/abs/1708.03346)
