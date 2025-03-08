@@ -74,8 +74,8 @@ impl From<base64::DecodeError> for LZJDError {
     }
 }
 
-impl From<bincode::Error> for LZJDError {
-    fn from(err: bincode::Error) -> Self {
+impl From<bincode::error::DecodeError> for LZJDError {
+    fn from(err: bincode::error::DecodeError) -> Self {
         LZJDError::Bincode(err.to_string())
     }
 }

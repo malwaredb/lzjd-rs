@@ -2,6 +2,7 @@ use crate::Result;
 
 use base64::engine::general_purpose;
 use base64::Engine;
+use bincode::config::{self, Configuration, Fixint, LittleEndian, NoLimit};
 use core::hash::BuildHasher;
 use core::hash::Hasher;
 use core::ops::Deref;
@@ -15,6 +16,8 @@ pub struct LZDict {
     // and the crate can become no_std
     entries: Vec<i32>,
 }
+
+const CONFIG: Configuration<LittleEndian, Fixint, NoLimit> = config::legacy();
 
 impl LZDict {
     /// Converts a base64 string into a Vec<i64> and wraps a LZDict around it.
@@ -31,7 +34,7 @@ impl LZDict {
                     v.push(b);
                     v
                 });
-            entries.push(bincode::deserialize(&vec)?);
+            entries.push(bincode::decode_from_slice(&vec, CONFIG)?.0);
         }
 
         Ok(Self { entries })
@@ -182,7 +185,7 @@ impl Display for LZDict {
     fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
         let bytes: Vec<u8> = self
             .iter()
-            .flat_map(|hash| bincode::serialize(&hash).unwrap())
+            .flat_map(|hash| bincode::encode_to_vec(hash, CONFIG).unwrap())
             .collect();
         let encoded = general_purpose::STANDARD.encode(bytes);
         write!(f, "{encoded}")
