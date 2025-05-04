@@ -8,7 +8,7 @@ fn generate_byte_sequence() -> Vec<u8> {
     let parts: Vec<[u8; 32]> = (0..10000)
         .map(|_| {
             let mut part = [0u8; 32];
-            rand::thread_rng().fill(&mut part);
+            rand::rng().fill(&mut part);
             part
         })
         .collect();
