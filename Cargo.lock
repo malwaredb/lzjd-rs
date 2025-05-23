@@ -379,9 +379,9 @@ dependencies = [
 
 [[package]]
 name = "malwaredb-murmurhash3"
-version = "0.1.2"
+version = "0.1.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c5134f3afaba0cc43419d88fdc051506e9be8e012085626edccedfde2c2ca5d4"
+checksum = "14e9c0aae66c3d672c8f2460f4df36b15cf38f94a3615d9d3898641472bddccb"
 
 [[package]]
 name = "memchr"
