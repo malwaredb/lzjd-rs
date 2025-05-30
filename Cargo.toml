@@ -18,7 +18,7 @@ malwaredb-murmurhash3 = "0.1"
 bincode = "2.0"
 crc32fast = "1.4"
 walkdir = "2.5"
-num_cpus = "1.16"
+num_cpus = "1.17"
 rayon = "1.10"
 
 [dev-dependencies]
