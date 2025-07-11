@@ -116,20 +116,17 @@ mod tests {
         let dist = dict_a.dist(&dict_b);
         assert!(
             dist.abs() < f64::EPSILON, // dist(a, b) == 0
-            "Distance of equal sequences (a and b) should equal 0, was {}",
-            dist
+            "Distance of equal sequences (a and b) should equal 0, was {dist}"
         );
         let dist = dict_a.dist(&dict_c);
         assert!(
             (1. - dist).abs() < f64::EPSILON, // dist(a, c) == 1
-            "Distance of totally different sequences (a and c) should equal 1, was {}",
-            dist
+            "Distance of totally different sequences (a and c) should equal 1, was {dist}"
         );
         let dist = dict_a.dist(&dict_d);
         assert!(
             (0.409_090_909_090_909_06 - dist).abs() < f64::EPSILON, // dist(a, d) == 0.409_090_909_090_909_06
-            "Distance of a and d should equal 0.40909090909090906, was {}",
-            dist
+            "Distance of a and d should equal 0.40909090909090906, was {dist}",
         );
         assert!(
             (dict_a.dist(&dict_d) - dict_d.dist(&dict_a)).abs() < f64::EPSILON, // dist(a,d) == dist(d,a)

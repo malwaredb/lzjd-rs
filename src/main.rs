@@ -224,7 +224,7 @@ fn compare(
     similarities
         .iter()
         .try_for_each(|(name_a, name_b, similarity)| {
-            writer.write_fmt(format_args!("{}|{}|{:03}\n", name_a, name_b, similarity))
+            writer.write_fmt(format_args!("{name_a}|{name_b}|{similarity:03}\n"))
         })?;
 
     Ok(())
