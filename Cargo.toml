@@ -19,7 +19,7 @@ bincode = "2.0"
 crc32fast = "1.5"
 walkdir = "2.5"
 num_cpus = "1.17"
-rayon = "1.10"
+rayon = "1.11"
 
 [dev-dependencies]
 rand = "0.9"
