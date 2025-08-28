@@ -1,3 +1,5 @@
+#![allow(dead_code)]
+
 //! Defines a wrapper around crc::crc32::Digest, implementing std::hash::Hasher
 //! as well as a std::hash::BuildHasher which builds the hasher.
 use std::hash::BuildHasher;
