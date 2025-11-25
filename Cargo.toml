@@ -10,6 +10,7 @@ keywords = ["lzjd", "edit", "distance", "Lempel", "Ziv"]
 categories = ["algorithms", "compression", "cryptography", "filesystem", "science"]
 license = "GPL-3.0"
 repository = "https://github.com/malwaredb/lzjd-rs"
+rust-version = "1.85"
 
 [dependencies]
 clap = { version = "4.5", features = ["derive"] }
