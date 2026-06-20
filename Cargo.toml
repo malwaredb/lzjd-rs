@@ -1,6 +1,6 @@
 [package]
 name = "malwaredb-lzjd"
-version = "0.1.3"
+version = "0.1.4"
 authors = ["Henk Dieter <henkdieter@tweedegolf.com>", "Richard Zak <richard.j.zak@gmail.com>"]
 edition = "2021"
 exclude = ["in/*", "out/*"]
@@ -11,6 +11,9 @@ categories = ["algorithms", "compression", "cryptography", "filesystem", "scienc
 license = "GPL-3.0"
 repository = "https://github.com/malwaredb/lzjd-rs"
 rust-version = "1.85"
+
+[badges]
+maintenance = { status = "deprecated" }
 
 [dependencies]
 clap = { version = "4.6", features = ["derive"] }

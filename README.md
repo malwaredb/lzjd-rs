@@ -1,4 +1,8 @@
-[![Test](https://github.com/malwaredb/lzjd-rs/actions/workflows/test.yml/badge.svg)](https://github.com/malwaredb/lzjd-rs/actions/workflows/test.yml)[![Lint](https://github.com/malwaredb/lzjd-rs/actions/workflows/lint.yml/badge.svg)](https://github.com/malwaredb/lzjd-rs/actions/workflows/lint.yml)[![Crates.io Version](https://img.shields.io/crates/v/malwaredb-lzjd)](https://crates.io/crates/malwaredb-lzjd)
+[![Crates.io Version](https://img.shields.io/crates/v/malwaredb-lzjd)](https://crates.io/crates/malwaredb-lzjd)
+
+> [!WARNING]  
+> This crate is no longer maintained as it's no longer necessary for the MalwareDB project.
+> Instead see https://github.com/malwaredb/lzjd2 which replaces this project or https://github.com/tweedegolf/lzjd-rs
 
 # LZJD
 
